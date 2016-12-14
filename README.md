@@ -22,3 +22,6 @@ django-admin startproject bookstore
 ./manage.py runserver      // server info
 ## To make migrations for store table
 ./manage.py makemigrations store
+
+### Create super user
+./manage.py createsuperuser
