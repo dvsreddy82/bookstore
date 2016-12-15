@@ -25,3 +25,17 @@ django-admin startproject bookstore
 
 ### Create super user
 ./manage.py createsuperuser
+
+To make migrations for store table
+
+./manage.py makemigrations store
+
+Create super user
+
+./manage.py createsuperuser
+
+To get the count of the Model count = Book.objects.all().count()
+
+Django packages
+
+https://djangopackages.org/packages
