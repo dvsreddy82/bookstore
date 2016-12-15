@@ -1,5 +1,6 @@
 from django.conf.urls import include, url
 from django.contrib import admin
+from registration.backends.default.urls import *
 
 urlpatterns = [
     # Examples:
@@ -8,4 +9,5 @@ urlpatterns = [
 
     url(r'^store/',include('store.urls'),name='store'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/', include('registration.backends.default.urls')),
 ]
