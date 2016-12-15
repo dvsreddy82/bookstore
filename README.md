@@ -42,3 +42,6 @@ To get the count of the Model count = Book.objects.all().count()
 Django packages
 
 https://djangopackages.org/packages
+
+{% template_tag %}
+{{ template_varible }}
