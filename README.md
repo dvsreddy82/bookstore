@@ -42,3 +42,8 @@ To get the count of the Model count = Book.objects.all().count()
 Django packages
 
 https://djangopackages.org/packages
+
+#####To show migrations
+
+./manage.py showmigrations
+
