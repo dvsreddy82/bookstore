@@ -46,4 +46,5 @@ https://djangopackages.org/packages
 #####To show migrations
 
 ./manage.py showmigrations
-
+{% template_tag %}
+{{ template_varible }}
