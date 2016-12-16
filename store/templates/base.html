@@ -3,7 +3,7 @@
 {% load staticfiles %}
 {% load bootstrap3 %}
 {% load bootstrap_themes %}
-{% load bootstrap_styles theme='simplex' type='min.css' %}
+{% bootstrap_styles theme='simplex' type='min.css' %}
 {% block  bootstrap3_extra_head %}
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700" rel="stylesheet" type="text/css">
     <link href="{% static 'base/css/style.css' %}" rel="stylesheet" type="text/css">
@@ -31,20 +31,21 @@
        </div>
        <div id="navbar" class="collapse navbar-collapse">
            <ul class="nav navbar-nav" >
-               <li class="hvr-curl-top-right"> <a href="{% url 'index' %}"></a> </li>
-               <li class="hvr-curl-top-right"> <a href="#about"></a> </li>
-               <li class="hvr-curl-top-right"> <a href="#contact"></a> </li>
+               <li class="hvr-curl-top-right"> <a href="{% url 'index' %}">Home</a> </li>
+               <li class="hvr-curl-top-right"> <a href="#about">About</a> </li>
+               <li class="hvr-curl-top-right"> <a href="#contact">Contact</a> </li>
            </ul>
         <div class="navbar-form pull-right">
             {% if request.user.is_authenticated %}
                 Welcome, {% if request.user.first_name %}
-                {{request.user.first_name}}
-                {% else %}
-                {{request.user.username}}
-                {% endif %} <a href="{% url 'auth_logout' %}" >Log Out</a>
-                {% else %}
-                    Welcome anonomous,  <a href="{% url 'auth_login' %}"> Login </a> or <a href="{% registration_register %}">Register</a>
-                {% endif %}
+                             {{request.user.first_name}}
+                        {% else %}
+                            {{request.user.username}}
+                        {% endif %} <a href="{% url 'auth_logout' %}" >Log Out</a>
+            {% else %}
+                    Welcome anonomous,  <a href="{% url 'auth_login' %}"> Login </a>
+                    or <a href="{% url 'registration_register' %}">Register</a>
+            {% endif %}
 
         </div>
        </div>
@@ -52,11 +53,12 @@
    </div>
 </nav>
 <div class="container-fluid">
-    <img src="{% static 'base/img/hearder_full' %}" class="bg"/>
-    <div class="row">
+    <img src="{% static 'base/img/header_full.jpg' %}" class="bg"/>
     <div class="parallax">
+    <div class="row">
+
         {% block body %}
-        <div class="col-md-offset-2 col-sm-12 maincontent">
+        <div class="col-md-8 col-md-offset-2 col-sm-12 maincontent">
             Welcome to store!
         </div>
         {% endblock %}
