@@ -1,0 +1,5 @@
+Greetings you got activated at {{ site.name }}. Please click the link below
+
+http://{{ site.domain }}{% url 'registration_activate' activation_key %}
+
+This link is valid for {{ expiration_days }}.
