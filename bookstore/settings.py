@@ -37,11 +37,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'store',
     'social.apps.django_app.default',
     'bootstrap3',
     'bootstrap_themes',
     'registration',
+    'compressor',
+    'store',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -114,7 +115,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR,'static/')
+COMPRESS_ENABLED = True
+STATICFILES_FINDERS = (
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+		'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+		'compressor.finders.CompressorFinder',
+)
 # Registration
 
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
