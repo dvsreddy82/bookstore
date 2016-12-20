@@ -79,10 +79,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'bookstore.wsgi.application'
 
 AUTHENTICATION_BACKENDS = (
-
-    'social.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
-
+    'social.backends.facebook.FacebookOAuth2',
 )
 
 
@@ -125,8 +123,9 @@ STATICFILES_FINDERS = (
 # Registration
 
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
-REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
-LOGIN_REDIRECT_URL = '/store/'
+REGISTRATION_AUTO_LOGIN = False # Automatically log the user in.
+LOGIN_REDIRECT_URL = '/store'
+LOGIN_URL = '/accounts/login/'
 # Email settings
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
