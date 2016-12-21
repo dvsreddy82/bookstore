@@ -13,6 +13,9 @@ which python // gives you the location
 
 mkvirtualenv bookstore-django // Making a directory
 
+######To work on 
+workon bookstore-django
+
 pip install django==1.8 // Downloading and installing Django
 
 cd Development/ django-admin startproject bookstore
