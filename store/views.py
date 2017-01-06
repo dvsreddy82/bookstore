@@ -8,6 +8,10 @@ from django.utils import timezone
 from django.http import JsonResponse
 import paypalrestsdk, stripe
 from .forms import ReviewForm
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
+import random
+import string
 @login_required(login_url="/accounts/login/")
 # Create your views here.
 
@@ -23,27 +27,46 @@ def store(request):
 
     return render(request,'base.html',context)
 
-def book_details (request,book_id):
-    book = Book.objects.get(pk=book_id)
-    context = {
-        'book':book,
+def book_details(request,book_id):
+    book= Book.objects.get(pk=book_id)
+    context= {
+        'book': book,
     }
     if request.user.is_authenticated():
-        if request.method == 'POST':
-            form = ReviewForm(request.POST)
+        if request.method== "POST":
+            form= ReviewForm(request.POST)
             if form.is_valid():
-                new_review = Review.objects.create(
-                    user= request.user,
-                    book=context['book'],
-                    text= form.cleaned_data.get('text')
+                new_review= Review.objects.create(
+                        user = request.user,
+                        book = context['book'],
+                        text = form.cleaned_data.get('text')
                 )
                 new_review.save()
-        else:
-            if Review.objects.filter(user=request.user,book=context['book']).count() ==0:
-                form=ReviewForm()
-                context['form']=form
-    context['reviews'] = book.review_set.all()
 
+                if Review.objects.filter(user=request.user).count()<6:
+                    subject= 'Your MysteryBooks.com discount code is here'
+                    from_email= 'librarian@mysterybooks.com'
+                    to_email= [request.user.mail]
+
+                    email_context = Context ({
+                        'username': request.user.username,
+                        'code': ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(6)),
+                        'discount': 10
+                    })
+
+                    text_email= render_to_string('email/review_email.txt', email_context)
+                    html_email= render_to_string('email/review_email.html', email_context)
+
+                    msg= EmailMultiAlternatives(subject, text_email, from_email, to_email)
+                    msg.attach_alternative(html_email, 'text/html')
+                    msg.content_subtype= 'html'
+                    msg.send()
+
+        else:
+            if Review.objects.filter(user=request.user, book=context['book']).count() == 0:
+                form= ReviewForm()
+                context['form']= form
+    context['reviews']= book.review_set.all()
     return render(request,'store/detail.html',context)
 
 def count(request):
