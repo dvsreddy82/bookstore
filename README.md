@@ -1,6 +1,10 @@
 # bookstore
 bookstore
 
+## TO start new app
+
+./manage.py startapp appname
+
 python -V //To find the version of Python that you are using
 
 sudo easy_install pip //For installing pip
